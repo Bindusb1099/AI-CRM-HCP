@@ -16,7 +16,7 @@ load_dotenv()
 
 llm = ChatGroq(
     groq_api_key=os.getenv("GROQ_API_KEY"),
-    model_name="gemma2-9b-it"
+    model_name="llama-3.3-70b-versatile"
 )
 
 class AgentState(TypedDict):
