@@ -30,6 +30,7 @@ Tool Router Node
 └────────────────────────────┘
    ↓
 Final Response
+
 🔹 LangGraph Nodes:
 detect_intent → Classifies user request
 run_tool → Executes CRM tools or LLM fallback
