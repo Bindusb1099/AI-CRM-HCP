@@ -24,6 +24,10 @@ def home():
 def chat(req: ChatRequest):
     try:
         result = agent.invoke({"user_input": req.message})
-        return {"response": result["response"]}
+
+        return {
+            "response": result.get("response", "No response generated")
+        }
+
     except Exception as e:
         return {"error": str(e)}

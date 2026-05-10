@@ -56,11 +56,12 @@ def run_tool(state: AgentState):
     elif intent == "next":
         result = next_best_action_tool()
     else:
-        result = log_interaction_tool({"summary": state["user_input"]})
+        # ✅ THIS IS THE FIX (LLM NOW USED)
+        response = llm.invoke(state["user_input"])
+        result = response.content
 
     state["response"] = result
     return state
-
 
 # Build graph
 graph = StateGraph(AgentState)
