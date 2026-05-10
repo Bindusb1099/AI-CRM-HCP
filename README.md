@@ -1,29 +1,43 @@
-AI-powered CRM system for Healthcare Field Representatives to manage HCP (Doctor) interactions, built using FastAPI, LangGraph, PostgreSQL, and React.
+AI-powered CRM system for Healthcare Field Representatives to manage HCP (Doctor) interactions using FastAPI, LangGraph, Groq LLM, PostgreSQL, and React.
 
-The system allows logging interactions, editing follow-ups, fetching doctor profiles, and generating AI-based insights.
+The system uses a LangGraph-based AI agent workflow combined with an LLM (Groq - Gemma2) to intelligently route user requests, generate insights, and assist in decision-making.
 
 ⚙️ Tech Stack
-
-Backend:
-
+Backend
 FastAPI
-LangGraph
+LangGraph (State-based AI workflow)
 LangChain
-Groq LLM
+Groq LLM (Gemma2-9B)
 PostgreSQL
-
-Frontend:
-
+Frontend
 React.js
 Axios
-🧠 Features
-Log doctor/HCP interactions
-Edit follow-up dates
-Fetch HCP profiles
-Generate interaction summaries
-AI-based next best action suggestions
-Chat-based CRM interface
-🗄️ Database Tables
+React Router
+🧠 LangGraph + LLM Architecture
+
+The AI system is built using a LangGraph StateGraph workflow:
+
+User Input
+   ↓
+Intent Detection Node
+   ↓
+Tool Router Node
+   ↓
+┌────────────────────────────┐
+│  Either:                  │
+│  • CRM Tools              │
+│  • OR LLM (Groq AI)      │
+└────────────────────────────┘
+   ↓
+Final Response
+🔹 LangGraph Nodes:
+detect_intent → Classifies user request
+run_tool → Executes CRM tools or LLM fallback
+🔹 LLM Usage:
+Groq Chat Model (Gemma2-9B)
+Used for natural language responses when no tool matches
+Provides AI-based CRM insights
+🗄️ Database Schema
 HCP Table
 id
 name
@@ -49,34 +63,23 @@ uvicorn main:app --reload
 API Docs:
 
 http://127.0.0.1:8000/docs
+
 🌐 Frontend Setup
 npm install
 npm install axios react-router-dom
 npm start
 
-Frontend runs at:
+Frontend:
 
 http://localhost:3000
-🔗 API Flow
 
-Frontend → FastAPI Backend → LangGraph AI Agent → PostgreSQL → Response → UI
+🔗 System Flow
+Frontend → FastAPI → LangGraph Agent → LLM / Tools → PostgreSQL → Response → UI
+💬 Features
 
-💬 Sample Input
-log interaction with doctor
-Output:
-Interaction logged successfully
-🔐 Environment Variables
-
-Create .env file:
-
-GROQ_API_KEY=your_api_key
-DB_URL=postgresql://postgres:postgres@localhost:5432/crm_db
-📌 Project Status
-
-✔ Completed for Naukri Round 1 Assignment
-✔ Backend + AI Agent integrated
-✔ Frontend connected with API
-
-👨‍💻 Author
-
-Developed as part of AI CRM Assignment Project
+✔ Log HCP interactions
+✔ Edit follow-ups
+✔ Fetch doctor profiles
+✔ AI-generated summaries
+✔ Next best action suggestions
+✔ Chat-based CRM interface
